@@ -1,103 +1,67 @@
-
+Problema da Mochila em Java:
+========================================
 public class Main
 {
 	public static void main(String[] args) {
-	    int w[] = {10 , 3};
-	    int p[] = {1000, 200};
-	    double[] cb = new double[w.length];
-	    int bag[];
-	    int capacidade_mochila = 20;
-	    int quantidade_atual = 0;
-	    double ganho_final = 0.0;
+	    double[] w = {18,15,10};
+	    double[] p = {25,24,15};
 	    
- 
-	    custo_beneficio(w,p,cb);
-	    printVetor(0, cb.length, cb);
-	    ordena(cb,0,cb.length - 1);
-	    printVetor(0, cb.length, cb);
-	    
-	    guloso(bag,capacidade_mochila,quantidade_atual,ganho_final,cb,w,p);
-	    
-	}
-	public static double guloso(int bag[], int capacidade_mochila,int quantidade_atual,double ganho_final,double[] cb,int[] w,int[] p){
-	    private int espaço_mochila = 0;
-	    for(int cont=0;cb.length;cont++){
-	        espaço_mochila = capacidade_mochila - quantidade_atual;
-	        if(espaço_mochila==0){
-	            printVetor(0,bag.length,bag);
-	            System.out.println(ganho_final);
-	        }
-	        if(espaço_mochila>=w[cont]){
-	            bag[cont] = bag[cont].Append w[cont]
-	        }else{
-	            
-	        }
-	    }
-	}
-	public static void printVetor(int i, int f, double[] v){
-	    for(int cont = i; cont < f; cont++)
-	        System.out.print(v[cont]+", ");
-	    System.out.println();
-	    
-	}
-	public static void ordena(double[] array, int indiceInicio, int indiceFim) {
-
-		// Condicional que verifica a validade dos parâmetros passados.
-		if (array != null && indiceInicio < indiceFim && indiceInicio >= 0 &&
-		 indiceFim < array.length && array.length != 0) {
-			int meio = ((indiceFim + indiceInicio) / 2);
-            
-			ordena(array, indiceInicio, meio);
-			ordena(array, meio + 1, indiceFim);
-			merge(array, indiceInicio, meio, indiceFim);
-			
-		}
-
-	}
-	public static void merge(double[] array, int indiceInicio, int meio, int indiceFim) {
-       
-		double[] auxiliar = new double[array.length];
-		//Copiando o trecho da lista que vai ser ordenada
-		for (int i = indiceInicio; i <= indiceFim; i++) {
-			auxiliar[i] = array[i];
-		}
-
-		//Índices auxiliares
-		int i = indiceInicio;
-		int j = meio + 1;
-		int k = indiceInicio;
-
-		//Junção das listas ordenadas
-		while (i <= meio && j <= indiceFim) {
-			if (auxiliar[i] < auxiliar[j]) {
-				array[k] = auxiliar[i];
-				i++;
-			} else {
-				array[k] = auxiliar[j];
-				j++;
-			}
-			k++;
-		}
-
-		//Append de itens que não foram usados na Junção
-		while (i <= meio) {
-			array[k] = auxiliar[i];
-			i++;
-			k++;
-		}
-
-		//Append de itens que não foram usados na Junção
-		while (j <= indiceFim) {
-			array[k] = auxiliar[j];
-			j++;
-			k++;
-		}
+	    double ganho = problemaMochila(w, p, 20);
+		System.out.println("O gano total foi: "+ganho);
 	}
 	
-    public static void custo_beneficio(int[] w,int[] p,double[] cb){
-        for(int i=0;w.length >i;i++){
-            cb[i] = p[i]/w[i];
+	public static double problemaMochila(double[] w, double[] p, double capacidadeMochila){
+	    double[] mochila = new double[w.length];
+	    double quantidadeAtual = 0;
+	    double ganhoFinal = 0;
+	    ordenarPorCustoBeneficio(w, p);
+	    for(int cont = 0; cont < w.length; cont++){
+	        double espacoMochila = capacidadeMochila - quantidadeAtual;
+	        if(espacoMochila == 0)
+	            return ganhoFinal;
+	        if(espacoMochila >= w[cont]){//cabe o peso total do item na mochila!
+	            mochila[cont] = w[cont];
+		        quantidadeAtual = quantidadeAtual + w[cont];
+		        ganhoFinal = ganhoFinal + p[cont];
+	        }
+	        else{ //vamos adicionar apenas uma porção do item na mochila
+	            mochila[cont] = espacoMochila;
+		        quantidadeAtual = quantidadeAtual + espacoMochila; //ou seja: capacidade_mochila
+		        ganhoFinal = ganhoFinal + (p[cont] / w[cont]) * espacoMochila;
+	        }
+	    }
+	    return ganhoFinal;
+	}
+	
+	public static void ordenarPorCustoBeneficio(double[] w, double[] p){
+	     //cria vetor de custo beneficio:
+	     double[] v = new double[w.length];
+	     for(int c = 0; c < w.length; c++)
+	        v[c] = p[c]/w[c];
+	        
+	     //Método da Bolha -> mais simples
+	     // for utilizado para controlar a quantidade de vezes que o vetor será ordenado.
+        for(int i = 0; i < v.length - 1; i++) {
+          // for utilizado para ordenar o vetor.
+          for(int j = 0; j < v.length - 1 - i; j++) {
+            /* Se o valor da posição atual do vetor for maior que o proximo valor,
+              então troca os valores de lugar no vetor. */
+            if(v[j] < v[j + 1]) {
+              double aux = v[j];
+              v[j] = v[j + 1];
+              v[j + 1] = aux;
+              //muda tbm no vetor w:
+              aux = w[j];
+              w[j] = w[j + 1];
+              w[j + 1] = aux;
+              //muda tbm no vetor p:
+              aux = p[j];
+              p[j] = p[j + 1];
+              p[j + 1] = aux;
+            }
+          }
         }
-    }
+	}
 }
+
 
