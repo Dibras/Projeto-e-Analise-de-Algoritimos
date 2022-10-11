@@ -2,13 +2,12 @@
 public class Main
 {
 	public static void main(String[] args) {
-	    int w[] = {10 , 3};
-	    int p[] = {1000, 200};
+	    int w[] = {10 , 3, 10};
+	    int p[] = {1000, 200, 5000};
 	    double[] cb = new double[w.length];
-	    int bag[];
+	    double bag[] = new double [w.length];
 	    int capacidade_mochila = 20;
-	    int quantidade_atual = 0;
-	    double ganho_final = 0.0;
+	    
 	    
  
 	    custo_beneficio(w,p,cb);
@@ -16,24 +15,10 @@ public class Main
 	    ordena(cb,0,cb.length - 1);
 	    printVetor(0, cb.length, cb);
 	    
-	    guloso(bag,capacidade_mochila,quantidade_atual,ganho_final,cb,w,p);
+	    //guloso(bag,capacidade_mochila,cb,w,p);
 	    
 	}
-	public static double guloso(int bag[], int capacidade_mochila,int quantidade_atual,double ganho_final,double[] cb,int[] w,int[] p){
-	    private int espaço_mochila = 0;
-	    for(int cont=0;cb.length;cont++){
-	        espaço_mochila = capacidade_mochila - quantidade_atual;
-	        if(espaço_mochila==0){
-	            printVetor(0,bag.length,bag);
-	            System.out.println(ganho_final);
-	        }
-	        if(espaço_mochila>=w[cont]){
-	            bag[cont] = bag[cont].Append w[cont]
-	        }else{
-	            
-	        }
-	    }
-	}
+
 	public static void printVetor(int i, int f, double[] v){
 	    for(int cont = i; cont < f; cont++)
 	        System.out.print(v[cont]+", ");
@@ -97,7 +82,7 @@ public class Main
     public static void custo_beneficio(int[] w,int[] p,double[] cb){
         for(int i=0;w.length >i;i++){
             cb[i] = p[i]/w[i];
+            
         }
     }
 }
-
