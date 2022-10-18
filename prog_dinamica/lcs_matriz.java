@@ -3,9 +3,9 @@
 public class Main
 {
 	public static void main(String[] args) {
-	    String [] x = "guistavo".split("");
-	    String [] y = "gustavci".split("");
-		int[][] l = new int [x.length + 1][y.length + 1];
+	    String [] x = "gustavo".split("");
+	    String [] y = "gustaovo".split("");
+		int[][] l = new int [y.length + 1][x.length + 1];
 		lcs(l,x,y);
 	}
 	public static void lcs (int[][] l,String[] x, String[] y ){
@@ -25,6 +25,6 @@ public class Main
 	            }
 	        }
 	    }
-	    System.out.println(l[x.length][y.length]);
+	    System.out.println(l[y.length][x.length]);
 	}
 }
