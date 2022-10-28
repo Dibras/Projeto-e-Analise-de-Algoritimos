@@ -25,13 +25,14 @@ public class TrabalhoPAA_LCS {
         
         String entrada = scan.nextLine();
         entrada = removeAcentos(entrada);
+        entrada = entrada.toUpperCase();
         
         if (verificaPalavraChave(entrada)){
             for (int cont = 0; cont <tokens.size(); cont ++){
                 if (verificaPalavraChave(tokens.get(cont))){
                     if(entrada.equals(tokens.get(cont).replace(",", ""))){
                         
-                        System.out.println ("Achei sua palavra: ");
+                        System.out.print ("Achei sua palavra: ");
                         System.out.println (tokens.get(cont).replace(",", ""));
                         System.out.println ("Significado: ");
                         for (int z = cont + 1; z <tokens.size(); z++){
