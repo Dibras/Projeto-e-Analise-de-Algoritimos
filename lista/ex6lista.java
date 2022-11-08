@@ -13,28 +13,30 @@ public class JavaApplication3 {
           int[] esteira1 ={10,15,9,15};
           int[] esteira2 ={5,7,5,10};
           int[] esteira3 ={12,5,2,14};
+          int[] resultado = new int [esteira1.length];
           int posi = 0;
+           int maior = 2;
           
           for(int i = 0; i < esteira1.length; i++ ){
-              int maior = 0;
 
-              if (posi = 1 || posi = 2){
-                        if (esteira1[i] > maior){
-                            maior = esteira1[i] ;
-                            posi = 1;
-                        }
-                        if (esteira2[i] > maior){
-                            maior = esteira2[i] ;
-                            posi = 2;
-                        }
-          }
-              if (esteira3[i] > maior){
+                if (esteira1[i] > maior && posi <= 2){
+                    maior = esteira1[i] ;
+                    posi = 1;
+                }
+                if (esteira2[i] > maior ){
+                    maior = esteira2[i] ;
+                    posi = 2;
+                }
+
+              if (esteira3[i] > maior && posi >= 2){
                   maior = esteira3[i] ;
                   posi = 3;
               }
               
-              
-              
+              resultado[i] = maior;
+          }
+          for(int j =0; j<resultado.length;j++){
+              System.out.println(resultado[j]);
           }
     }
 }
