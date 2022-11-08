@@ -15,10 +15,17 @@ public class JavaApplication3 {
           int[] esteira3 ={12,5,2,14};
           int[] resultado = new int [esteira1.length];
           int posi = 0;
-           int maior = 2;
+          
           
           for(int i = 0; i < esteira1.length; i++ ){
-
+                int maior = 0;
+                if (posi == 0){
+                  if( esteira1[i] >esteira3[i]  ){
+                      posi = 1;
+                  }else{
+                      posi = 3;
+                  }
+                }
                 if (esteira1[i] > maior && posi <= 2){
                     maior = esteira1[i] ;
                     posi = 1;
